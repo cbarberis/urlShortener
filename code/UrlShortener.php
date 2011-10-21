@@ -31,7 +31,7 @@ class UrlShortener extends Controller {
 		$req = new RestfulService("http://api.bitly.com/v3/shorten?login=".self::get_bitly_username()."&apiKey=".self::get_bitly_api_key()."&longUrl=".urlencode($UrlSegment)."&format=json",0);
 		
 		$response = $req->request();
-		Debug::dump($response); die;
+		
 		$short = json_decode($response->getBody(), true);		
 		return (isset($short['data']['url'])) ? $short['data']['url'] : '';
 
