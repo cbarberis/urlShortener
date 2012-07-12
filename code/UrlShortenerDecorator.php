@@ -11,9 +11,12 @@ class UrlShortenerDecorator extends DataObjectDecorator {
 	}
 	
 	function updateCMSFields(&$fields) {
-	
-		$fields->addFieldToTab('Root.Content.UrlShortener', new CheckboxField('ShortUrlOpt', 'Short Url'));
-		$fields->addFieldToTab('Root.Content.UrlShortener', new ReadonlyField('ShortUrl', 'Short Url'));
+		$tabName = ($this->owner instanceof SiteTree) ? 'Root.Content.SocialMedia' : 'Root.SocialMedia';
+		$fields->addFieldToTab($tabName, new HeaderField('ShortHeader', 'URL Shortener', 4));
+		if(!UrlShortener::ready_to_short()) 
+			$fields->addFieldToTab($tabName, new LiteralField('NotGoodToShort', '<p>ATTENTION: This will NOT make shorten, you need to set your bitly API credentials</p>'));
+		$fields->addFieldToTab($tabName, new CheckboxField('ShortUrlOpt', 'Short Url'));
+		$fields->addFieldToTab($tabName, new ReadonlyField('ShortUrl', 'Short Url'));
 		
 	}
 	

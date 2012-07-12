@@ -6,8 +6,6 @@ class UrlShortener extends Controller {
 	
 	private static $bitly_api_key;
 	
-
-	
 	public static function set_bitly_username($username) {
 		self::$bitly_username = $username;
 	}
@@ -27,7 +25,6 @@ class UrlShortener extends Controller {
 	static function ready_to_short() {
 		return (self::$bitly_api_key && self::$bitly_username);
 	}
-	
 	
 	function makeShortUrl($UrlSegment = null) {
 		if(!$UrlSegment) return '';
